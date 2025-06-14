@@ -64,9 +64,9 @@
     </div>
   </div>
 
-injectVisitorTable();
-document.getElementById("main").style.display = "block";
-
+  <div id="mainContent"></div>
+  <script src="assets/main.js"></script>
+  
  <script>
     (async () => {
       try {
@@ -89,6 +89,8 @@ document.getElementById("main").style.display = "block";
           console.log("✅ JS loaded");
           document.getElementById("loader").style.display = "none";
           document.getElementById("mainContent").style.display = "block";
+          injectVisitorTable();
+          document.getElementById("visitorMain").style.display = "block";
         };
         document.body.appendChild(jsScript);
       } catch (err) {
