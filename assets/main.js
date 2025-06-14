@@ -1,6 +1,9 @@
-  function injectVisitorTable() {
+function injectVisitorTable() {
   const main = document.createElement('main');
-<main style="display:none;">
+  main.id = "visitorMain";
+  main.style.display = "none"; 
+
+  main.innerHTML = `
     <div id="tableWrapper">
       <table id="visitorTable">
         <thead>
@@ -18,7 +21,8 @@
         <tbody></tbody>
       </table>
     </div>
-;
+  `;
+
   const container = document.getElementById("mainContent") || document.body;
   container.appendChild(main);
 }
