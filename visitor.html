@@ -14,14 +14,27 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    #loader {
+    #pageLoader {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
-
+     #loginLoader {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+      #dataLoader {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
     .spinner {
       border: 6px solid #333;
       border-top: 6px solid #00ffcc;
@@ -95,8 +108,8 @@
         document.body.appendChild(jsScript);
       } catch (err) {
         console.error("❌ Asset loading failed:", err);
-        const loader = document.getElementById("loader");
-        if (loader) loader.innerText = "❌ Failed to load assets.";
+        const loader = document.getElementById("pageLoader");
+        if (pageLoader) loader.innerText = "❌ Failed to load assets.";
       }
     })();
   </script>
