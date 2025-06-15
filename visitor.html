@@ -44,7 +44,7 @@
 </head>
 <body>
 
-<div id="loader">
+<div id="pageLoader">
     <div class="spinner"></div>
     <div>Initializing elevated access...</div>
   </div>
@@ -60,7 +60,7 @@
       <input type="text" id="username" placeholder="Username" />
       <input type="password" id="password" placeholder="Password" />
       <button onclick="login()">Login</button>
-      <div id="loader" class="spinner" style="display:none;"></div>
+      <div id="loginLoader" class="spinner" style="display:none;"></div>
     </div>
   </div>
 
@@ -87,7 +87,7 @@
         jsScript.src = jsUrl;
         jsScript.onload = () => {
           console.log("✅ JS loaded");
-          document.getElementById("loader").style.display = "none";
+          document.getElementById("pageLoader").style.display = "none";
           document.getElementById("mainContent").style.display = "block";
           injectVisitorTable();
           document.getElementById("visitorMain").style.display = "none";
