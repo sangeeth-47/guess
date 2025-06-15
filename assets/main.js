@@ -1,5 +1,7 @@
 function injectVisitorTable() {
   const main = document.createElement('main');
+  main.id = "visitorMain";
+
   Object.assign(main.style, {
     display: "none",              
     height: "100vh",
@@ -9,6 +11,7 @@ function injectVisitorTable() {
     width: "100%",
   });
 
+  // Inject inline style directly into div
   const tableWrapperStyle = `
     flex: 1;
     overflow-y: auto;
@@ -17,10 +20,9 @@ function injectVisitorTable() {
     display: flex;
     flex-direction: column;
   `;
-}
-  
+
   main.innerHTML = `
-    <div id="tableWrapper">
+    <div id="tableWrapper" style="${tableWrapperStyle}">
       <table id="visitorTable">
         <thead>
           <tr>
