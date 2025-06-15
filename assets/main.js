@@ -1,12 +1,24 @@
 function injectVisitorTable() {
   const main = document.createElement('main');
-  main.id = "visitorMain";
-  main.style.display = "none";
-  main.style.height = "100vh";
-  main.style.display = "flex";
-  main.style.flexDirection = "column";
-  main.style.overflow = "hidden"; 
+  Object.assign(main.style, {
+    display: "none",              
+    height: "100vh",
+    flexDirection: "column",
+    display: "flex",
+    overflow: "hidden",
+    width: "100%",
+  });
 
+  const tableWrapperStyle = `
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  `;
+}
+  
   main.innerHTML = `
     <div id="tableWrapper">
       <table id="visitorTable">
