@@ -14,20 +14,14 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    #pageLoader {
+    #loader {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
-      #dataLoader {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+
     .spinner {
       border: 6px solid #333;
       border-top: 6px solid #00ffcc;
@@ -50,7 +44,7 @@
 </head>
 <body>
 
-<div id="pageLoader">
+<div id="loader">
     <div class="spinner"></div>
     <div>Initializing elevated access...</div>
   </div>
@@ -66,7 +60,7 @@
       <input type="text" id="username" placeholder="Username" />
       <input type="password" id="password" placeholder="Password" />
       <button onclick="login()">Login</button>
-    </form>
+      <div id="loader"></div>
     </div>
   </div>
 
@@ -93,7 +87,7 @@
         jsScript.src = jsUrl;
         jsScript.onload = () => {
           console.log("✅ JS loaded");
-          document.getElementById("pageLoader").style.display = "none";
+          document.getElementById("loader").style.display = "none";
           document.getElementById("mainContent").style.display = "block";
           injectVisitorTable();
           document.getElementById("visitorMain").style.display = "none";
@@ -101,8 +95,8 @@
         document.body.appendChild(jsScript);
       } catch (err) {
         console.error("❌ Asset loading failed:", err);
-        const loader = document.getElementById("pageLoader");
-        if (pageLoader) loader.innerText = "❌ Failed to load assets.";
+        const loader = document.getElementById("loader");
+        if (loader) loader.innerText = "❌ Failed to load assets.";
       }
     })();
   </script>
