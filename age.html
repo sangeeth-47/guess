@@ -127,11 +127,7 @@
       document.getElementById("loader").style.display = "none";
       document.getElementById("mainContent").style.display = "block";
 
-      // ✅ Fallback: explicitly hide toast if it's still visible
-      const toast = document.getElementById("faceToast");
-      if (toast && toast.classList.contains("hidden")) {
-        toast.style.display = "none"; // ensure consistent behavior
-      }
+       initApp();
 
     } catch (err) {
       console.error("Asset loading failed:", err);
