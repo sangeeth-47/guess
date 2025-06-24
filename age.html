@@ -89,32 +89,57 @@
   </div>
 
   <script>
-    (async () => {
-      try {
-        const res = await fetch("https://sangeeth2314105883websitecounter.azurewebsites.net/api/getAssets");
-        const { cssUrl, jsUrl } = await res.json();
+  (async () => {
+    try {
+      const res = await fetch("https://sangeeth2314105883websitecounter.azurewebsites.net/api/getAssets");
+      const { cssUrl, jsUrl } = await res.json();
 
-        const cssLink = document.createElement("link");
-        cssLink.rel = "stylesheet";
-        cssLink.href = cssUrl;
-        const cssLoaded = new Promise(resolve => cssLink.onload = resolve);
-        document.head.appendChild(cssLink);
+      const cssLink = document.createElement("link");
+      cssLink.rel = "stylesheet";
+      cssLink.href = cssUrl;
 
-        const jsScript = document.createElement("script");
-        jsScript.src = jsUrl;
-        const jsLoaded = new Promise(resolve => jsScript.onload = resolve);
-        document.body.appendChild(jsScript);
+      const cssLoaded = new Promise(resolve => {
+        cssLink.onload = resolve;
+        cssLink.onerror = () => {
+          console.error("❌ Failed to load CSS");
+          resolve(); // Fallback to continue even if CSS fails
+        };
+      });
 
-        await Promise.all([cssLoaded, jsLoaded]);
+      document.head.appendChild(cssLink);
 
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-      } catch (err) {
-        console.error("Asset loading failed:", err);
-        document.getElementById("loader").innerText = "❌ Failed to load assets.";
+      const jsScript = document.createElement("script");
+      jsScript.src = jsUrl;
+
+      const jsLoaded = new Promise(resolve => {
+        jsScript.onload = resolve;
+        jsScript.onerror = () => {
+          console.error("❌ Failed to load JS");
+          resolve(); // Continue even if JS fails
+        };
+      });
+
+      document.body.appendChild(jsScript);
+
+      await Promise.all([cssLoaded, jsLoaded]);
+
+      // ✅ Now that assets are loaded, reveal main content
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+
+      // ✅ Fallback: explicitly hide toast if it's still visible
+      const toast = document.getElementById("faceToast");
+      if (toast && toast.classList.contains("hidden")) {
+        toast.style.display = "none"; // ensure consistent behavior
       }
-    })();
-  </script>
+
+    } catch (err) {
+      console.error("Asset loading failed:", err);
+      document.getElementById("loader").innerText = "❌ Failed to load assets.";
+    }
+  })();
+</script>
+
 
 </body>
 </html>
