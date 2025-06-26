@@ -13,7 +13,7 @@
       color: white;
       font-family: 'Segoe UI', sans-serif;
     }
-    
+
     #loader {
       display: flex;
       flex-direction: column;
@@ -55,26 +55,10 @@
 
   <div id="container">
     <div id="loginForm">
-      <h3>Login</h3>
+      <h3 style="text-align:center; font-family: 'Papyrus', Harrington; font-size: 20px;">Login</h3>
       <div class="disclaimer-banner"><span>⚠ You are entering a restricted area. Authorized users only.</span></div>
-
-      <!-- Username Field -->
-      <label class="ds-label">
-        <span>
-          <input type="text" id="username" class="ds_textinput" placeholder="Username" />
-          <div class="ds-input-icon">👤</div>
-        </span>
-        <i></i>
-      </label>
-
-      <!-- Password Field -->
-      <label class="ds-label">
-        <span>
-          <input type="password" id="password" class="ds_textinput" placeholder="Password" />
-          <div class="ds-input-icon">🔒</div>
-        </span>
-        <i></i>
-      </label>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
       <button onclick="login()">Login</button>
       <div class="spinner-center">
         <div class="loginspinner" id="loginspinner"></div>
