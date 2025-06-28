@@ -18,7 +18,7 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    #loader {
+   #loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -26,9 +26,10 @@
   height: 100vh;
   background: radial-gradient(ellipse at top, #1e123d 0%, #0a0519 100%);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 9999; 
+  z-index: 9999;
   overflow: hidden;
 }
     .spinner {
@@ -45,6 +46,13 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    
+    .loading-text {
+  margin-top: -10px; /* Move text slightly up */
+  margin-left: 8px;  /* Slight right shift */
+  font-size: 1rem;
+  color: #ccc;
+}
 
     #mainContent {
       display: none;
@@ -54,9 +62,9 @@
 <body>
 
   <div id="loader">
-    <div class="spinner"></div>
-    <div><br>Loading Age Guessing AI...</div>
-  </div>
+  <div class="spinner"></div>
+  <div class="loading-text">Loading Age Guessing AI...</div>
+</div>
 
   <div id="mainContent">
     <div class="container">
