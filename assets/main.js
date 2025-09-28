@@ -14,11 +14,11 @@ function injectVisitorTable() {
   // Inject inline style directly into div
   const tableWrapperStyle = `
     flex: 1;
-    overflow-y: auto;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
   `;
 
   main.innerHTML = `
@@ -34,6 +34,8 @@ function injectVisitorTable() {
             <th>Device<br><input class="filter-input" data-col="5" placeholder="Device" /></th>
             <th>OS<br><input class="filter-input" data-col="6" placeholder="OS" /></th>
             <th>Browser<br><input class="filter-input" data-col="7" placeholder="Browser" /></th>
+            <th>Result Text<br><input class="filter-input" data-col="8" placeholder="Result Text" /></th>
+            <th>URL<br><input class="filter-input" data-col="9" placeholder="URL" /></th>
           </tr>
         </thead>
         <tbody></tbody>
