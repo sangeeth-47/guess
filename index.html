@@ -130,7 +130,7 @@
   <script>
   (async () => {
     try {
-      const res = await fetch("https://sangeeth2314105883websitecounter.azurewebsites.net/api/getAssets");
+      const res = await fetch("http://localhost:7071/api/getAssets");
       const { cssUrl, jsUrl } = await res.json();
 
       const cssLink = document.createElement("link");
