@@ -35,7 +35,7 @@ function injectVisitorTable() {
             <th>OS<br><input class="filter-input" data-col="6" placeholder="OS" /></th>
             <th>Browser<br><input class="filter-input" data-col="7" placeholder="Browser" /></th>
             <th>Result Text<br><input class="filter-input" data-col="8" placeholder="Result Text" /></th>
-            <th>URL<br><input class="filter-input" data-col="9" placeholder="URL" /></th>
+            <th>FileName<br><input class="filter-input" data-col="9" placeholder="FileName" /></th>
           </tr>
         </thead>
         <tbody></tbody>
