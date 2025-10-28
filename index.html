@@ -131,17 +131,25 @@
   (async () => {
     const hfInfoURL = "https://sangeeth47-age-gender-predictor.hf.space/gradio_api/info";
 
-    // ✅ Function: Check if Hugging Face backend is awake (after page load)
+    //Function: Check if Hugging Face backend is awake (after idle)
     async function waitForHuggingFaceReady(statusEl, maxWaitMs = 45000) {
       if (!statusEl) return;
-      statusEl.innerText = "🕐 Waking up model (this may take up to 45s)...";
       console.log("⏳ Checking if Hugging Face backend is awake...");
 
+      let dotCount = 0;
+      let dotTimer = setInterval(() => {
+        dotCount = (dotCount + 1) % 4; // cycles 0–3
+        const dots = ".".repeat(dotCount);
+        statusEl.innerText = `🕐 Waking up model${dots} (this may take up to 45s)`;
+      }, 500); // updates every 0.5s
+
+      const hfInfoURL = "https://sangeeth47-age-gender-predictor.hf.space/gradio_api/info";
       const start = Date.now();
       while (Date.now() - start < maxWaitMs) {
         try {
           const resp = await fetch(hfInfoURL, { method: "GET" });
           if (resp.ok) {
+            clearInterval(dotTimer);
             console.log("🟢 Hugging Face backend is ready!");
             statusEl.innerText = "🟢 Model ready.";
             return true;
@@ -150,11 +158,10 @@
           // still waking up
         }
 
-        const elapsed = Math.floor((Date.now() - start) / 1000);
-        statusEl.innerText = `🕐 Waking up model... (${elapsed}s)`;
         await new Promise(r => setTimeout(r, 2000)); // retry every 2s
       }
 
+      clearInterval(dotTimer);
       statusEl.innerText = "⚠️ Model still waking up. Please refresh the page.";
       console.warn("❌ Hugging Face backend not ready after 45 seconds");
       return false;
