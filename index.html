@@ -134,13 +134,12 @@
     //Function: Check if Hugging Face backend is awake (after idle)
     async function waitForHuggingFaceReady(statusEl, maxWaitMs = 45000) {
       if (!statusEl) return;
-      console.log("⏳ Checking if Hugging Face backend is awake...");
 
       let dotCount = 0;
       let dotTimer = setInterval(() => {
         dotCount = (dotCount + 1) % 4; // cycles 0–3
         const dots = ".".repeat(dotCount);
-        statusEl.innerText = `🕐 Waking up model${dots} (this may take up to 45s)`;
+        statusEl.innerText = `🕐 Waking up model${dots}\n(⏳this may take up to 45s)`;
       }, 500); // updates every 0.5s
 
       const hfInfoURL = "https://sangeeth47-age-gender-predictor.hf.space/gradio_api/info";
@@ -150,8 +149,8 @@
           const resp = await fetch(hfInfoURL, { method: "GET" });
           if (resp.ok) {
             clearInterval(dotTimer);
-            console.log("🟢 Hugging Face backend is ready!");
-            statusEl.innerText = "🟢 Model ready.";
+            console.log("Hugging Face backend is ready!");
+            statusEl.innerText = "🤩 Model ready shine.";
             return true;
           }
         } catch {
