@@ -77,7 +77,23 @@
   font-size: 1rem;
   color: #ccc;
 }
+.playstore-footer {
+  margin-top: 9px;
+  text-align: center;
+}
 
+.playstore-badge {
+  width: 120px;   /* official badge, reduced size */
+  max-width: 100%;
+  height: auto;
+  opacity: 0.95;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.playstore-badge:hover {
+  opacity: 1;
+  transform: scale(1.3);
+}
     #mainContent {
       display: none;
     }
@@ -98,10 +114,11 @@
 
       <div class="qa-toggle" onclick="toggleQA()">❓</div>
       <div class="qa-box" id="qaBox">
-        <div class="qa-item"><strong>Q1:</strong> Why isn't the Age Guessing feature functioning? <br><strong>A:</strong> The model is still being trained.</div>
+        <div class="qa-item"><strong>Q1:</strong> Why isn’t the Age Guessing feature giving accurate results? <br><strong>A:</strong> The model is still being trained and fine-tuned, so results may vary.</div>
         <div class="qa-item"><strong>Q2:</strong> Why isn't the Age Guess Spinning forever?<br><strong>A:</strong> Free-tier services may sleep—refresh to re-activate.</div>
         <div class="qa-item"><strong>Q3:</strong> How does the AI guess age?<br><strong>A:</strong> Through a trained deep learning model analyzing facial features.</div>
-        <div class="qa-item"><strong>Q4:</strong> Is my image stored?<br><strong>A:</strong> Yes, the image is stored for processing. It’s needed by the API to generate prediction.</div>
+        <div class="qa-item"><strong>Q4:</strong> Is my image stored?<br><strong>A:</strong> Yes. Images are stored only as required for processing and prediction, secured using AES-256 encryption within a private, access-controlled system.</div>
+        <div class="qa-item"><strong>Q5:</strong> What is this project for?<br><strong>A:</strong> This project was developed as part of my university coursework to explore real-world applications of artificial intelligence and web technologies.</div>
       </div>
 
       <div class="upload-area">
@@ -125,6 +142,19 @@
 </a>
       <div class="notice" id="devNotice"></div>
     </div>
+    <div class="playstore-footer">
+  <a
+    href="https://play.google.com/store/apps/details?id=com.sangeeth47.guess"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+      alt="Get it on Google Play"
+      class="playstore-badge"
+    >
+  </a>
+</div>
   </div>
 
   <script>
