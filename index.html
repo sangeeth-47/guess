@@ -78,8 +78,15 @@
   color: #ccc;
 }
 .playstore-footer {
-  margin-top: 9px;
+  position: relative;
+  z-index: 0;
+  margin-top: 12px;
   text-align: center;
+  width: 100%;
+}
+
+body.chat-open .playstore-footer {
+  z-index: -1;
 }
 
 .playstore-badge {
@@ -97,6 +104,180 @@
     #mainContent {
       display: none;
     }
+
+/* Chat Section */
+.chat-button-container {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 3000;
+  font-family: 'Segoe UI', sans-serif;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+}
+
+.chat-button-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.chat-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(160, 255, 243, 0.18);
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  background:
+    linear-gradient(145deg, rgba(29, 41, 49, 0.98), rgba(8, 12, 18, 0.98)),
+    radial-gradient(circle at 30% 28%, rgba(0, 255, 204, 0.22), transparent 58%);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  animation: pulse-glow 2.8s ease-in-out infinite;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.chat-button::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 204, 0.16), transparent 68%);
+  filter: blur(18px);
+  opacity: 0.65;
+  z-index: -1;
+  animation: rotate-glow 4s linear infinite;
+}
+
+.chat-button:hover {
+  transform: translateY(-1px) scale(1.06);
+  border-color: rgba(0, 255, 204, 0.34);
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.38),
+    0 0 22px rgba(0, 255, 204, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.12);
+}
+
+.chat-button:hover::before {
+  opacity: 1;
+}
+
+.chat-button.active {
+  transform: translateY(-1px) scale(1.05);
+}
+
+.chat-button.active::before {
+  opacity: 1;
+}
+
+.chat-button-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  color: #a8fff0;
+}
+
+.chat-panel {
+  position: fixed;
+  top: 70px;
+  left: 5px;
+  z-index: 3001;
+  width: min(380px, calc(100vw - 40px));
+  height: min(560px, calc(100vh - 120px));
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: rgba(18, 18, 18, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transform: translateY(-10px) scale(0.96);
+  transform-origin: top left;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.chat-panel iframe[data-src] {
+  background-image: linear-gradient(135deg, rgba(15, 17, 21, 0.96), rgba(7, 10, 14, 0.96));
+}
+
+.chat-panel.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.chat-panel-header {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chat-panel-header h6 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: left;
+}
+
+.chat-panel-header p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-close-btn {
+  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.chat-close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.05);
+}
+
+.chat-frame {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  border: 0;
+  background: #0f1115;
+}
   </style>
 </head>
 <body>
@@ -109,9 +290,32 @@
 
   <div id="mainContent">
     <div class="container">
+      <!-- Floating Chat Button -->
+      <div class="chat-button-container" id="chatContainer">
+          <button class="chat-button" id="chatButton" type="button" aria-label="Open chat" aria-expanded="false">
+              <svg class="chat-button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M20 3H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3v3.5a.5.5 0 0 0 .8.4L13.5 19H20a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm0 14h-7.14l-4.06 3.1V17H4V5h16v12Z"/>
+              </svg>
+          </button>
+          <div class="chat-panel" id="chatPanel" aria-hidden="true">
+              <div class="chat-panel-header">
+                  <div>
+                      <h6>Live Chat</h6>
+                      <p>Connect with me on the chat portal</p>
+                  </div>
+                  <button class="chat-close-btn" id="chatCloseButton" type="button" aria-label="Close chat">×</button>
+              </div>
+              <iframe
+                  class="chat-frame"
+                  data-src="https://chat.sangeeth47.in"
+                  title="Sangeeth chat"
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin">
+              </iframe>
+          </div>
+      </div>
       <div class="title">Guess Your Age</div>
       <div class="description">Upload your image and see what age and gender the AI thinks you are.</div>
-
       <div class="qa-toggle" onclick="toggleQA()">❓</div>
       <div class="qa-box" id="qaBox">
         <div class="qa-item"><strong>Q1:</strong> Why isn’t the Age Guessing feature giving accurate results? <br><strong>A:</strong> The model is still being trained and fine-tuned, so results may vary.</div>
@@ -136,7 +340,7 @@
       ❌ <strong> No face detected!<br></strong> Please upload a clear image showing a human face.
       </div>
       <p id="status"></p>
-      <a href="https://sangeeth47.in" target="_blank" class="footer glow-on-hover">Powered by SANGEETH M K</a>
+      <a href="https://sangeeth47.in/public" target="_blank" class="footer glow-on-hover">Powered by SANGEETH M K</a>
       <a id="visitCount" href="https://guess.sangeeth47.in/visitor" target="_blank" title="Administrative access only">
   Loading visits...
 </a>
@@ -197,7 +401,7 @@
     }
 
     try {
-      // ✅ Step 1: Load assets
+      // Step 1: Load assets
       const res = await fetch("https://api.sangeeth47.in/api/getAssets");
       const { cssUrl, jsUrl } = await res.json();
 
@@ -230,14 +434,14 @@
 
       await Promise.all([cssLoaded, jsLoaded]);
 
-      // ✅ Step 2: Reveal the page
+      // Step 2: Reveal the page
       document.getElementById("loader").style.display = "none";
       document.getElementById("mainContent").style.display = "block";
 
-      // ✅ Step 3: Initialize the app (your existing function)
+      // Step 3: Initialize the app
       if (typeof initApp === "function") initApp();
 
-      // ✅ Step 4: Run Hugging Face readiness check (non-blocking, shows only in #status)
+      // Step 4: Run Hugging Face readiness check (non-blocking, shows only in #status)
       const status = document.getElementById("status");
       waitForHuggingFaceReady(status);
 
