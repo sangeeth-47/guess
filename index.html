@@ -363,7 +363,7 @@ body.chat-open .playstore-footer {
 
   <script>
   (async () => {
-    const hfInfoURL = "https://sangeeth47-age-gender-predictor.hf.space/gradio_api/info";
+    const hfInfoURL = "https://internal-api.sangeeth47.in/api/hfinfo";
 
     //Function: Check if Hugging Face backend is awake (after idle)
     async function waitForHuggingFaceReady(statusEl, maxWaitMs = 45000) {
@@ -376,7 +376,7 @@ body.chat-open .playstore-footer {
         statusEl.innerText = `🕐 Waking up model${dots}\n(⏳this may take up to 45s)`;
       }, 500); // updates every 0.5s
 
-      const hfInfoURL = "https://sangeeth47-age-gender-predictor.hf.space/gradio_api/info";
+      const hfInfoURL = "https://internal-api.sangeeth47.in/api/hfinfo";
       const start = Date.now();
       while (Date.now() - start < maxWaitMs) {
         try {
